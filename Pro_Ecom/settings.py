@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'products',
+    'customers',
+    'orders',
+    'themes',
+
 ]
 
 MIDDLEWARE = [
@@ -54,7 +59,7 @@ ROOT_URLCONF = 'Pro_Ecom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,13 +77,20 @@ WSGI_APPLICATION = 'Pro_Ecom.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+'default': {
+'ENGINE': 'django.db.backends.mysql',
+'NAME': 'ecom_db', #enter the database name cereated in workbench
+'USER': 'root',
+'PASSWORD': '3636',
+'HOST': '',
+'PORT': '',
+'OPTIONS': {
+'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 }
+}
+}
+
 
 
 # Password validation
@@ -115,9 +127,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+import os #
+
+STATIC_URL = 'static/' # to show static images
+STATIC_ROOT = os.path.join(BASE_DIR,  'staticfiles')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+MEDIA_URL = '/media/'   #++++ to show uploaded files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

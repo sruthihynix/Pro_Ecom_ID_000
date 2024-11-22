@@ -1,0 +1,63 @@
+
+  {%  load static %}
+<!-- Feadtued Categories -->
+<!-- <div class="categories">-->
+<!--        <div class="small-container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-3">-->
+<!--                    <img src="{% static 'images/category-1.jpg' %}">-->
+<!--                </div>-->
+<!--                <div class="col-3">-->
+<!--                    <img src="{% static 'images/category-2.jpg' %}">-->
+<!--                </div>-->
+<!--                <div class="col-3">-->
+<!--                    <img src="{% static 'images/category-3.jpg' %}">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <!-- Featured Products -->
+  <div class="small-container">
+        <h2 class="title">Featured Products</h2>
+        <div class="row">
+            {% for i in featured_products %}
+             <div class="col-4">
+                               <!-- Link to the product detail page -->
+                    <a href="{% url 'product_detail' i.id  %}" >
+                        <img src="{{i.image.url}}"  alt="{{ i.title }}"></a>
+                     <!-- Display product details -->
+                    <h4>{{i.title}}</h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <p>₹{{i.price}}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <h2 class="title">Latest Products</h2>
+        <div class="row">
+             {% for i in latest_products %}
+             <div class="col-4">
+                               <!-- Link to the product detail page -->
+                    <a href="{% url 'product_detail' i.id  %}" >
+                        <img src="{{i.image.url}}"  alt="{{ i.title }}"></a>
+                     <!-- Display product details -->
+                    <h4>{{i.title}}</h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <p>₹{{i.price}}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
