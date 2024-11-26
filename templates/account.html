@@ -4,11 +4,14 @@
 {% block banner %}
 {% include 'account_banner.html' %}
 
-js for the movements between login and register tabs
+<!--js for the movements between login and register tabs-->
 <script>
         var LoginForm = document.getElementById("LoginForm");
         var RegForm = document.getElementById("RegForm");
         var Indicator = document.getElementById("Indicator");
+
+
+<!-- js function to register and login        -->
         function register() {
             RegForm.style.transform = "translatex(0px)";
             LoginForm.style.transform = "translatex(0px)";
@@ -19,9 +22,18 @@ js for the movements between login and register tabs
             RegForm.style.transform = "translatex(300px)";
             LoginForm.style.transform = "translatex(300px)";
             Indicator.style.transform = "translate(0px)";
-
         }
     </script>
+<!--checking which tag is active and load that tAG-->
+{% if register %}
+    <script>
+        register()
+    </script>
+{% else %}
+    <script>
+        login()
+    </script>
+{% endif %}
 {%  endblock banner %}
 
 

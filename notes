@@ -1,0 +1,15 @@
+1.The attribute #### enctype="multipart/form-data" ##### is essential,
+    when your form includes file uploads because it determines
+    how the form data is encoded when it is sent to the server.
+2.  enctype (encoding type) is an attribute of the <form> tag
+    that specifies how the form data should be encoded when submitting it to the server.
+3. This encoding ensures that the server can handle the data in different formats—both regular text and binary files.
+
+4.<li class="{{ message.tags}}"> {{ message }} </li> ###
+    message.tags is a property of a Message object that provides a string representing the type or category of the message.
+    It is commonly used for styling messages based on their type using CSS classes.
+    messages.debug
+    messages.info
+    messages.success
+    messages.warning
+    messages.error
