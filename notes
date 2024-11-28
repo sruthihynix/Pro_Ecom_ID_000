@@ -13,3 +13,9 @@
     messages.success
     messages.warning
     messages.error
+
+5. def __str__(self):
+    "order-{}-{}".format(...):
+
+    this uses Python's string format method to construct the string representation.
+    {} are placeholders that are replaced with the values provided in the arguments of .format().

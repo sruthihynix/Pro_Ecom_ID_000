@@ -2,8 +2,19 @@
 
 
 {% block content %}
-<!--<h1>products description here</h1>-->
-{% include 'cart_container.html' %}
+
+<!-- message  display here-->
+
+    {% if messages %}
+            {% for message in messages%}
+                <li class="{{ message.tags}}"> {{ message }} </li>  <!--  class="{{ message.tags}}" check notes-->
+            {% endfor %}
+
+        {% else %}
+
+            {% include 'cart_container.html' %}
+    {% endif %}
+
 {%  endblock content %}
 
 

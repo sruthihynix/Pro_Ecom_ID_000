@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from django.shortcuts import render
 from .models import Order,OderedItem
 from products.models import Product
+from django.contrib import messages
 # Create your views here.
 def show_cart(request):
     user = request.user
@@ -57,3 +58,43 @@ def add_to_cart(request):
         # print(ordered_item)
         # print(product,quantity)
         return redirect('cart')
+
+def remove_item_from_cart(request,pk):
+    
+    item=OderedItem.objects.get(pk=pk)
+    if item:
+        item.delete()
+    return redirect('cart')
+
+def check_out_cart(request):
+    if request.POST:
+        try:
+            user=request.user
+            customer=user.customer_profile
+            total=float(request.POST.get('total'))  # Fallback to 0 if 'total' is missing
+
+            # Fetch the order object, ensuring it exists
+            order_obj= Order.objects.get(
+                owner=customer,
+                order_status=Order.CART_STAGE
+            )
+            # to check order_obj is present
+            if order_obj:
+                order_obj.order_status=Order.ORDER_CONFIRMED # update order status
+                order_obj.total_price=total
+                order_obj.save()
+
+                status_message="Your order is processed. Your items will be delivered in 5 days"
+                messages.success(request,status_message)
+            else:
+                status_message = "Unable to process order"
+                messages.error(request, status_message)
+
+        except Exception as e:
+
+            status_message = "Unable to process order"
+            messages.error(request, status_message)
+
+    return redirect('cart')
+
+

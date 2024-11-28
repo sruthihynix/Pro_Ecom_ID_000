@@ -15,17 +15,20 @@ def show_account(request):
             # print(request.POST)
             username=request.POST.get('username')
             password = request.POST.get('password')
+            # name=  # this filed is not added
             email=request.POST.get('email')
             address=request.POST.get('address')
             phone=request.POST.get('phone')
         # create user account
             user=User.objects.create_user(
+
                username=username,
                password=password,
                email=email
             )
         #create customer account
             customer=Customer.objects.create(
+                name=username,
                user=user,
                phone=phone,
                address=address

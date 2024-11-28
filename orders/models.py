@@ -17,10 +17,16 @@ class Order(models.Model): #
                    (ORDER_REJECTED,"ORDER_REJECTED")
                    )
     order_status=models.IntegerField(choices=STATUS_CHOICE,default=CART_STAGE) # order status first cartstage ayirikkum ie 0,
+    total_price=models.FloatField(default=0)
     owner=models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True,related_name='orders') #owner is the present customer --revrse relationship#An Order belongs to a Customer (via the owner field).
     delete_status = models.IntegerField(choices=DELETE_CHOICES, default=LIVE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return "order-{}-{}".format(self.id,self.owner.user.username)
+
+        # return "order-{}-{}".format(self.id, self.owner.username)
 
 class OderedItem(models.Model):
     product=models.ForeignKey(Product,related_name='added_carts',on_delete=models.SET_NULL,null=True) #An OderedItem refers to a Product (via the product field).
