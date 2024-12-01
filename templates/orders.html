@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<!-- message  display here-->
+
+    {% if messages %}
+            {% for message in messages%}
+                <li class="{{ message.tags}}"> {{ message }} </li>  <!--  class="{{ message.tags}}" check notes-->
+            {% endfor %}
+
+        {% else %}
+
+            {% include 'order_container.html' %}
+    {% endif %}
+
+{%  endblock content %}
+
+

@@ -4,7 +4,13 @@ from django.shortcuts import render
 from .models import Order,OderedItem
 from products.models import Product
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+
+@login_required(login_url='account')
 def show_cart(request):
     user = request.user
     if user.is_authenticated:
@@ -19,6 +25,7 @@ def show_cart(request):
     # else:
     return render(request, 'cart.html', {'cart': None})
     # return render(request,'cart.html')
+
 
 def add_to_cart(request):
 
@@ -97,4 +104,14 @@ def check_out_cart(request):
 
     return redirect('cart')
 
+@login_required(login_url='account')
+def view_orders(request):
+    user=request.user
+    customer=user.customer_profile
+    # print(user,customer)
+    all_orders=Order.objects.filter(owner=customer).exclude(order_status=Order.CART_STAGE)#here filter customer  if the cartstage=0 it get avoided
+    context={'orders':all_orders}
+
+
+    return render(request,'orders.html',context)
 
